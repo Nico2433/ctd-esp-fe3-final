@@ -10,8 +10,8 @@ const Footer = () => {
       display: { xs: "none", md: "flex" },
       flexDirection: "column",
       height: "100%",
-    }}
-      color={"background.box"}>
+      bgcolor: "background.box"
+    }}>
 
       <ButtonBase onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} sx={{
         bgcolor: "#f21d1d",
