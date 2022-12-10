@@ -1,60 +1,63 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, useState, useReducer } from "react";
 import { createTheme, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 
 export const GlobalContext = createContext();
 
-const themeLight = createTheme({
-  palette: {
-    mode: "light",
-    background: {
-      default: "#e4f0e2",
-      box: "#ECE7E7",
-      button: "#4F91CA"
-    },
-  }
-});
-
-const themeDark = createTheme({
-  palette: {
-    mode: "dark",
-    background: {
-      default: "#403C3C",
-      box: "#222222",
-      button: "#D02020"
-    },
-    text: {
-      primary: "#ffffff"
-    }
-  }
-});
-
 const GlobalContextProvider = ({ children }) => {
   //Aqui deberan implementar la logica propia del Context, utilizando el hook useMemo
-  const [users, setUsers] = useState([])
-  const [light, setLight] = useState(true)
   const [updateFavs, setUpdateFavs] = useState(true)
 
-  useMemo(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then(data => data.json())
-      .then(resp => {
-        setUsers(resp)
-      })
-      .catch(error => console.error("Error", error))
-  }, [])
+  const initialState = {
+    light: true
+  }
+  
+  function reducer(state, action) {
+  
+    switch (action.type) {
+  
+      case "light":
+        return {
+          ...state,
+          light: true
+        }
+  
+      case "dark":
+        return {
+          ...state,
+          light: false
+        }
+  
+      default:
+        return state
+    }
+  }
+  
+  const [state, dispatch] = useReducer(reducer, initialState);
 
+  const theme = createTheme({
+    palette: {
+      mode: state.light ? "light" : "dark",
+      background: {
+        default: state.light ? "#e4f0e2" : "#403C3C",
+        box: state.light ? "#ECE7E7" : "#222222",
+        button: state.light ? "#4F91CA" : "#D02020"
+      },
+      text: {
+        primary: state.light ? "rgba(0, 0, 0, 0.87)" : "#fff"
+      }
+    }
+  });
   const store = {
-    users,
-    light,
+    state,
+    dispatch,
     updateFavs,
-    setUpdateFavs: setUpdateFavs,
-    changeTheme: setLight
+    setUpdateFavs,
   }
 
   return (
     <GlobalContext.Provider value={store}>
-      <ThemeProvider theme={light ? themeLight : themeDark}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
           {children}
       </ThemeProvider>

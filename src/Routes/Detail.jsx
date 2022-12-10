@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import { Card, CardContent, Typography } from '@mui/material';
-import { Box } from '@mui/system';
-
+import { Card, CardContent, Typography, Box } from '@mui/material';
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
@@ -16,7 +14,6 @@ const Detail = () => {
       .then(data => data.json())
       .then(resp => {
         setUserData(resp)
-        console.log(resp);
       })
       .catch(error => console.error("Error", error))
   }, [])

@@ -1,15 +1,8 @@
-import { useContext } from 'react'
 import { GlobalContext } from './utils/global.context.jsx'
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '@emotion/react';
+import { AppBar, Button, Box, Typography, Toolbar, IconButton, Container } from '@mui/material'
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
@@ -21,7 +14,7 @@ const navigation = ['/home', '/contact', '/favs'];
 
 const Navbar = () => {
   const theme = useTheme();
-  const { changeTheme } = useContext(GlobalContext);
+  const { dispatch, state } = useContext(GlobalContext);
   const navigate = useNavigate();
 
   return (
@@ -64,7 +57,7 @@ const Navbar = () => {
                 {page}
               </Button>
             ))}
-            <IconButton sx={{ ml: 1 }} onClick={() => changeTheme(prev => !prev)} color="inherit">
+            <IconButton sx={{ ml: 1 }} onClick={() => state.light === false ? dispatch({type: "light"}) : dispatch({type: "dark"})} color="inherit">
               {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
           </Box>

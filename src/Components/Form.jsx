@@ -1,7 +1,7 @@
-import { TextField, Button, Card, Typography } from '@mui/material'
 import { useState } from 'react'
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { TextField, Button, Card, Typography } from '@mui/material'
 
 
 const Form = () => {
@@ -26,7 +26,7 @@ const Form = () => {
     validationSchema: validation,
     onSubmit: (values) => {
       console.log(values);
-      setMessage(`Gracias ${values.name}, te contactaremos via email`)
+      setMessage(`Thanks ${values.name}, we'll send you an email`)
     },
   });
 
@@ -57,7 +57,7 @@ const Form = () => {
           helperText={formik.touched.email && formik.errors.email}
           sx={{ my: 2 }}
         />
-        <Button sx={{ bgcolor: "background.button", color: "text.primary" }} type="submit">
+        <Button role={"button"} sx={{ bgcolor: "background.button", color: "text.primary" }} type="submit">
           Submit
         </Button>
       </form>

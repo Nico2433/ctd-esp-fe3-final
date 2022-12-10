@@ -1,24 +1,20 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./Components/Navbar"
-import Footer from "./Components/Footer"
-import Contact from "./Routes/Contact"
-import Home from "./Routes/Home"
-import Detail from "./Routes/Detail"
-import Favs from "./Routes/Favs"
-
+import { Layout } from "./Components/Layout"
+import { routes } from "./navigation"
 
 function App() {
   return (
     <div className="App">
-        <BrowserRouter>
-        <Navbar />
+      <BrowserRouter>
         <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/dentist/:id" element={<Detail />} />
-          <Route path="/favs" element={<Favs />} />
+          <Route element={<Layout />}>
+            {
+              routes.map(({ id, path, Element }) => (
+                <Route key={id} path={path} element={<Element />} />
+              ))
+            }
+          </Route>
         </Routes>
-        <Footer />
       </BrowserRouter>
     </div>
   );

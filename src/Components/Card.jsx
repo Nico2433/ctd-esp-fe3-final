@@ -1,11 +1,11 @@
+import { GlobalContext } from "./utils/global.context";
+import { useReducer, useEffect, useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { CardMedia, CardContent, Typography, Button } from "@mui/material";
+import CardMaterial from "@mui/material/Card";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { Link } from "react-router-dom";
-import CardMaterial from "@mui/material/Card";
-import { useReducer, useEffect, useContext } from "react";
-import { GlobalContext } from "./utils/global.context";
-import { useState } from "react";
+
 
 
 const Card = ({ name, username, id }) => {

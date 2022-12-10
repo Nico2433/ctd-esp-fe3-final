@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
 import { GlobalContext } from "../Components/utils/global.context";
+import { useContext } from "react";
 import Card from "../Components/Card";
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
@@ -7,11 +7,7 @@ import Card from "../Components/Card";
 const Favs = () => {
   const favorites = JSON.parse(localStorage.getItem("favUsers"))
 
-  const { updateFavs, setUpdateFavs } = useContext(GlobalContext)
-
-  useEffect(() => {
-
-  }, [updateFavs])
+  useContext(GlobalContext)
 
   return (
     <>
